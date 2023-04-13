@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    tools {
+        maven "maven3"
+        jdk "jdk8"
+    }
+    stages{
+        stage('Fetch code') {
+          steps{
+              git branch: 'main', url:'https://github.com/kemdej/bootcamp01.git'
+          }  
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean install -DskipTests'
+            }
+            post {
+                success {
+                    echo "Now Archiving."
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Checkstyle Analysis'){
+            steps {
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
+    }
+}
