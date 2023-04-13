@@ -1,0 +1,28 @@
+agent any
+	tools {
+	    maven "maven3"
+	    jdk "jdk8"
+	}
+	stages {
+	    stage('Fetch code') {
+            steps {
+               git branch: 'jenk-build', url: 'https://github.com/kemdej/bootcamp01.git'
+            }
+	    }
+	    stage('Build'){
+	        steps{
+	           sh 'mvn install -DskipTests'
+	        }
+	        post {
+	           success {
+	              echo 'Now Archiving it...'
+	              archiveArtifacts artifacts: '**/target/*.war'
+	           }
+	        }
+	    }
+	    stage('UNIT TEST') {
+            steps{
+                sh 'mvn test'
+            }
+        }
+	}
