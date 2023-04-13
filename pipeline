@@ -6,7 +6,7 @@ agent any
 	stages {
 	    stage('Fetch code') {
             steps {
-               git branch: 'jenk-build', url: 'https://github.com/kemdej/bootcamp01.git'
+               git branch: 'admin', url: 'https://github.com/kemdej/bootcamp01.git'
             }
 	    }
 	    stage('Build'){
