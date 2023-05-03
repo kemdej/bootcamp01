@@ -6,13 +6,15 @@ pipeline {
     }
     environment {
         registryCredential = 'ecr:us-east-1:awslogin'
-        appRegistry = "741610810238.dkr.ecr.us-east-1.amazonaws.com/kem-ecr"
-        vprofileRegistry = "https://741610810238.dkr.ecr.us-east-1.amazonaws.com"
+        appRegistry = "251632699502.dkr.ecr.us-east-1.amazonaws.com/gti-ecr"
+        vprofileRegistry = "https://251632699502.dkr.ecr.us-east-1.amazonaws.com"
+        cluster = "kemo-cluster"
+        services = "kemocont-service"
     }
     stages {
         stage('Fetch code') {
             steps {
-               git branch: 'main', url: 'https://github.com/kemdej/bootcamp01.git'
+               git branch: 'jenk-build', url: 'https://github.com/engineeredwin/bootcamp01.git'
             }
         }
         stage('UNIT TEST') {
@@ -65,6 +67,13 @@ pipeline {
                         dockerimage.push("$BUILD_NUMBER")
                         dockerimage.push('latest')
                     }
+                }
+            }
+        }
+        stage('ecs deploy') {
+            steps {
+                withAWS(credentials: 'awslogin', region: 'us-east-1') {
+                    sh 'aws ecs update-service --cluster ${clutser} --service ${services} --force-new-deployment'
                 }
             }
         }
