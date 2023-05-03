@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Fetch code') {
             steps {
-               git branch: 'jenk-build', url: 'https://github.com/engineeredwin/bootcamp01.git'
+               git branch: 'main', url: 'https://github.com/kemdej/bootcamp01.git'
             }
         }
         stage('UNIT TEST') {
