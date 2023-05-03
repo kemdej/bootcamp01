@@ -9,7 +9,7 @@ pipeline {
         appRegistry = "741610810238.dkr.ecr.us-east-1.amazonaws.com/kem-ecr"
         vprofileRegistry = "741610810238.dkr.ecr.us-east-1.amazonaws.com"
         clusternm = "kemo-cluster"
-        services = "kemocont-service"
+        service = "kemocont-service"
     }
     stages {
         stage('Fetch code') {
