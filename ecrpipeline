@@ -6,8 +6,8 @@ pipeline {
     }
     environment {
         registryCredential = 'ecr:us-east-1:awslogin'
-        appRegistry = "251632699502.dkr.ecr.us-east-1.amazonaws.com/gti-ecr"
-        vprofileRegistry = "https://251632699502.dkr.ecr.us-east-1.amazonaws.com"
+        appRegistry = "741610810238.dkr.ecr.us-east-1.amazonaws.com/kem-ecr"
+        vprofileRegistry = "741610810238.dkr.ecr.us-east-1.amazonaws.com"
         clusternm = "kemo-cluster"
         services = "kemocont-service"
     }
