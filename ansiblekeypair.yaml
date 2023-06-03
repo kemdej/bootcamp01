@@ -1,0 +1,19 @@
+---
+-  nname: create key
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+- name: create aew EC2 key pair, returns generated private key
+  amazon.aws.ec2_key:
+      name: my_keypair_ansib
+      region: us-east-1
+  register: key
+- name: print out
+    debug:
+      var: key
+
+- name: copy key
+    copy:
+      content: "{{key.key.private_key}}"
+      dest: ./my_keypair_ans.pem
